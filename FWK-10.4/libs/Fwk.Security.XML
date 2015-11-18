@@ -346,12 +346,19 @@
             <param name="cnnString">Cadena de coneccion</param>
             <returns>Lista de DomainsUrl</returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.DirectoryServicesBase.DomainsUrl_Get(System.String,System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.DirectoryServicesBase.DomainsUrl_Get_FromSp_all(System.String)">
             <summary>
-            
+            Retorna todos los DolmainUrl por medio de un sp usp_GetDomainsUrl_All que lee de bd encriptada
             </summary>
-            <param name="cnnString"></param>
-            <param name="domainName"></param>
+            <param name="cnnStringName">Nombre de la cadena de cnn</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.Security.ActiveDirectory.DirectoryServicesBase.DomainsUrl_Get_FromSp(System.String,System.String)">
+            <summary>
+            Retorna DolmainUrl por medio de un sp usp_GetDomainsUrl_ByDomainName que lee de bd encriptada
+            </summary>
+            <param name="cnnStringName">Nombre de la cadena de cnn</param>
+            <param name="domainName">ej Allus-Ar</param>
             <returns></returns>
         </member>
         <member name="M:Fwk.Security.ActiveDirectory.DirectoryServicesBase.SetError(Fwk.Exceptions.TechnicalException)">
@@ -463,6 +470,15 @@
             
             </summary>
         </member>
+        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.#ctor(System.String,System.String,Fwk.Security.ActiveDirectory.ImpersonateLogin)">
+            <summary>
+            
+            </summary>
+            <param name="domainName"></param>
+            <param name="cnnStringName"></param>
+            <param name="performWindowsContextImpersonalization">Impersobaliza con windows context impersonation.
+             usando usuario y clave LDAP</param>
+        </member>
         <member name="M:Fwk.Security.ActiveDirectory.ADHelper.#ctor(System.String,System.String,System.Boolean)">
             <summary>
             
@@ -478,6 +494,15 @@
             </summary>
             <param name="domainName"></param>
             <param name="cnnStringName"></param>
+        </member>
+        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.Init_withoutdatabase(System.String,System.String,System.Boolean)">
+            <summary>
+            Inicializa sinir a la bd para buscar los datos de usuario reseteador 
+            _LDAPPath, _LDAPUser, _LDAPPassword deben previamente estar cargados 
+            </summary>
+            <param name="domainName"></param>
+            <param name="cnnStringName"></param>
+            <param name="performWindowsContextImpersonalization"></param>
         </member>
         <member name="M:Fwk.Security.ActiveDirectory.ADHelper.#ctor(System.String,System.String,System.String)">
             <summary>
@@ -2392,6 +2417,30 @@
             </summary>
             <param name="owner"></param>
         </member>
+        <member name="T:Fwk.Security.Impersonation_2">
+            <summary>
+            Perform windows context Impersonation
+            </summary>
+        </member>
+        <member name="M:Fwk.Security.Impersonation_2.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor de la clase Impersonate
+            Por defecto impersonaliza para realizar cambio de contraseña
+            </summary>       
+            <param name="userName">Dominio del usuario a impersonalizar</param>
+            <param name="password">password</param>
+            <param name="domain">Dominio ej Pelsoft</param>
+        </member>
+        <member name="M:Fwk.Security.Impersonation_2.Impersonate">
+            <summary>
+            Lleva a cabo la impersonalizacion
+            </summary>
+        </member>
+        <member name="M:Fwk.Security.Impersonation_2.UnImpersonate">
+            <summary>
+            Termina la sesion y retorna a la anterior
+            </summary>
+        </member>
         <member name="T:Fwk.Security.Impersonation">
             <summary>
             Perform windows context Impersonation
@@ -3812,6 +3861,13 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Fwk.Security.SVC.UpdateRulesCategoryService.Execute(Fwk.Security.ISVC.UpdateRulesCategory.UpdateRulesCategoryReq)">
+            <summary>
+            
+            </summary>
+            <param name="pServiceRequest"></param>
+            <returns></returns>
         </member>
         <member name="T:Fwk.Security.SVC.CreateRuleService">
             <summary>
