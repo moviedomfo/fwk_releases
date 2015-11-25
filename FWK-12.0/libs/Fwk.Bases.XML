@@ -8368,7 +8368,7 @@
             <summary>
             
             </summary>
-            <param name="pAssemblyString"></param>
+            <param name="pAssemblyString">El parametro pAssemblyString espera el siguiente formato : [Namespase.ClassName ,Assembly]</param>
             <param name="pClassName"></param>
             <param name="pAssembly"></param>
         </member>
@@ -8391,7 +8391,7 @@
             <summary>
             Crea un tipo dinamicamente a partir del nombre un archivo.-
             </summary>
-            <param name="pAssemblyString">Concatenacion de ClassName + , + AssemblyName</param>
+            <param name="pAssemblyString">Concatenacion de [ClassName,AssemblyName]</param>
             <param name="pPath">Ruta del archivo</param>
             <returns>Type definido por ClassName</returns>
         </member>
