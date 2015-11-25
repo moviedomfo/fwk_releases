@@ -257,7 +257,7 @@
             
             </summary>
         </member>
-        <member name="T:Fwk.Security.ActiveDirectory.ADHelper">
+        <member name="T:Fwk.Security.ActiveDirectory.ADWrapper">
             <summary>
             Wrapper de Active Directory con funcionalidades para interactuar contra un controlador de dominio .-
             
@@ -346,12 +346,11 @@
             <param name="cnnString">Cadena de coneccion</param>
             <returns>Lista de DomainsUrl</returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.DirectoryServicesBase.DomainsUrl_Get(System.String,System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.DirectoryServicesBase.DomainsUrl_Get_FromSp_all(System.String)">
             <summary>
-            
+            Retorna todos los DolmainUrl por medio de un sp usp_GetDomainsUrl_All que lee de bd encriptada
             </summary>
-            <param name="cnnString"></param>
-            <param name="domainName"></param>
+            <param name="cnnStringName">Nombre de la cadena de cnn</param>
             <returns></returns>
         </member>
         <member name="M:Fwk.Security.ActiveDirectory.DirectoryServicesBase.DomainsUrl_Get_FromSp(System.String,System.String)">
@@ -466,12 +465,19 @@
             Dominio
             </summary>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.Finalize">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.Finalize">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.#ctor(System.String,System.String,System.Boolean)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.#ctor(System.String,Fwk.Security.ActiveDirectory.ImpersonateLogin)">
+            <summary>
+            
+            </summary>
+            <param name="domainName"></param>
+            <param name="impersonateLogin">Impersobaliza con windows context impersonation.    usando usuario y clave LDAP</param>
+        </member>
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.#ctor(System.String,System.String,System.Boolean)">
             <summary>
             
             </summary>
@@ -479,7 +485,7 @@
             <param name="cnnStringName"></param>
             <param name="performWindowsContextImpersonalization"></param>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.#ctor(System.String,System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.#ctor(System.String,System.String)">
             <summary>
             Esta sobrecarga obtiene datos de impersonalizacion en la tabla Domain controllers atravez de 
             la conexion pasada por parametros
@@ -487,15 +493,31 @@
             <param name="domainName"></param>
             <param name="cnnStringName"></param>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.#ctor(System.String,System.String,System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.Init_withoutdatabase(System.String,System.Boolean)">
+            <summary>
+            Inicializa sin ir a la bd para buscar los datos de usuario reseteador 
+            _LDAPPath, _LDAPUser, _LDAPPassword deben previamente estar cargados 
+            </summary>
+            <param name="domainName"></param>
+            <param name="performWindowsContextImpersonalization"></param>
+        </member>
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.Init(System.String,System.String,System.Boolean)">
+            <summary>
+            Inicializa buscando la info de cada dominio en la bd
+            </summary>
+            <param name="domainName"></param>
+            <param name="cnnStringName"></param>
+            <param name="performWindowsContextImpersonalization"></param>
+        </member>
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.#ctor(System.String,System.String,System.String)">
             <summary>
             
             </summary>
-            <param name="path">Domain path Ej </param>
+            <param name="path">Domain path Ej "LDAP\"</param>
             <param name="user">AD admin user</param>
             <param name="pwd">password de un usuario con pivilegios suficiente</param>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_Get(System.String,System.String,Fwk.Security.ActiveDirectory.LoginResult@)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_Get(System.String,System.String,Fwk.Security.ActiveDirectory.LoginResult@)">
             <summary>
             Busca un usuario con autenticacion 
             Returna como parametro el resultado de loging
@@ -505,55 +527,55 @@
             <param name="loginResult">resultado de loging</param>
             <returns>DirectoryEntry</returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_Get(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_Get(System.String)">
             <summary>
             Obtiene un usuario por nombre sin tener en cuenta las credenciales del usuario
             </summary>
             <param name="userName"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.Person_Get(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.Person_Get(System.String)">
             <summary>
             Obtiene un usuario por nombre sin tener en cuenta las credenciales del usuario
             </summary>
             <param name="userName"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_IsAccountActive(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_IsAccountActive(System.String)">
             <summary>
             
             </summary>
             <param name="userName"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_IsAccountLocked(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_IsAccountLocked(System.String)">
             <summary>
              Gets or sets a value indicating if the user account is locked out
             </summary>
             <param name="userName"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_Unlock(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_Unlock(System.String)">
             <summary>
             Unlock user
             </summary>
             <param name="userName"></param>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_SetLockedStatus(System.String,System.Boolean)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_SetLockedStatus(System.String,System.Boolean)">
             <summary>
             Alternate of Unlock user method
             </summary>
             <param name="userName"></param>
             <param name="lockUser">true = loock user</param>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_SetActivation(System.String,System.Boolean)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_SetActivation(System.String,System.Boolean)">
             <summary>
             Enable or disable user acount 
             </summary>
             <param name="userName"></param>
             <param name="disabled"></param>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_ResetPwd(System.String,System.String,System.Boolean)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_ResetPwd(System.String,System.String,System.Boolean)">
             <summary>
             Reset password. To execute it ensure that you was used impersonalization constructor. 
             </summary>
@@ -561,41 +583,41 @@
             <param name="password">new passsword</param>
             <param name="unlockAccount">Lock or unlock flag</param>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_Get_ByName(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_Get_ByName(System.String)">
             <summary>
             Obtiene un usuario por nombre sin tener en cuenta las credenciales del usuario
             </summary>
             <param name="userName"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_Exists(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_Exists(System.String)">
             <summary>
             Verifica si el usuario existe.- 
             </summary>
             <param name="userName">Nombre de loging de usuario</param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_SearchGroupList(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_SearchGroupList(System.String)">
             <summary>
             Retorna los grupos a los que pertenece el usuario .-
             </summary>
             <param name="userName">Nombre completo del usuario</param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_SearchGroupStringList(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_SearchGroupStringList(System.String)">
             <summary>
             Obtiene todo los usuarios pertenecientes al dominio.-
             Busca por cn nombre@mail retorna el sAMAccountName ejemplo: moviedo
             </summary>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.Users_SearchByGroupName(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.Users_SearchByGroupName(System.String)">
             <summary>
             Retorna la lista de usuarios pertenecientes a un determinado grupo
             </summary>
             <param name="groupName">Nombre del grupo</param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.Users_Search_StartName(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.Users_Search_StartName(System.String)">
             <summary>
             Retorna una lista de usuarios cuyo nombre comiense con fname.-
             Ejemplo: evel*
@@ -603,7 +625,7 @@
             <param name="fName"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_CheckLogin(System.String,System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_CheckLogin(System.String,System.String)">
             <summary>
             Este metodo permite determinar si un usuario puede loguearce en un dominio
             tambien chequea si la cuenta esta activa
@@ -612,12 +634,12 @@
             <param name="password">Password del usuario.-</param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_ChangeEmail(System.String,System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_ChangeEmail(System.String,System.String)">
             <summary>
             Metodo de prueva
             </summary>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_IsAccountActive(System.DirectoryServices.DirectoryEntry)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_IsAccountActive(System.DirectoryServices.DirectoryEntry)">
             <summary>
             Este metodo realiza una aperacion logica con el valor userAccountControl para deternçminar si la cuenta de usuario 
             esta abilitada o no.-
@@ -627,7 +649,7 @@
             <param name="de"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.User_IsAccountLockout(System.DirectoryServices.DirectoryEntry)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.User_IsAccountLockout(System.DirectoryServices.DirectoryEntry)">
             <summary>
             Este metodo realiza una aperacion logica con el valor userAccountControl para deternçminar si la cuenta de usuario 
             esta habilitada o no.-
@@ -639,38 +661,38 @@
             <param name="de"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.Group_GetByName(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.Group_GetByName(System.String)">
             <summary>
             Obtiene un ADGroup que reprecenta un grupo 
             </summary>
             <param name="pName"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.Groups_GetAll">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.Groups_GetAll">
             <summary>
             Obtiene todo los grupos pertenecientes al dominio.-
             </summary>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.Group_GetUsersArray(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.Group_GetUsersArray(System.String)">
             <summary>
             Lista simple de grupos de usuario
             </summary>
             <param name="groupName"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.Domain_GetList1">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.Domain_GetList1">
             <summary>
             Obtiene la lista de dominios
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.Domain_GetList">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.Domain_GetList">
             <summary>
             Obtiene la lista de dominios
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.GlobalCatalogs(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.GlobalCatalogs(System.String)">
             <summary>
             Lista de Global Catalog 
             Global Catalog : es una parte de la base de datos de nuestro Active Directory usado para realizar búsquedas en este.
@@ -678,14 +700,14 @@
             <param name="domainName"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.ProcessActiveDirectoryException(System.Exception)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.ProcessActiveDirectoryException(System.Exception)">
             <summary>
             
             </summary>
             <param name="ex"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.GetValue(System.String,System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.GetValue(System.String,System.String)">
             <summary>
             
             </summary>
@@ -693,28 +715,28 @@
             <param name="nameValue"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.GetStringProperties(System.DirectoryServices.DirectoryEntry)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.GetStringProperties(System.DirectoryServices.DirectoryEntry)">
             <summary>
             Obtiene un string con todas las propiedades de un objeto de AD
             </summary>
             <param name="pDirectoryEntry"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.GetStringProperties(System.DirectoryServices.SearchResult)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.GetStringProperties(System.DirectoryServices.SearchResult)">
             <summary>
             Obtiene un string con todas las propiedades de un objeto de AD
             </summary>
             <param name="pSearchResult"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.GetGroupFromMemberOf(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.GetGroupFromMemberOf(System.String)">
             <summary>
             
             </summary>
             <param name="memberOf"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.GetProperty(System.DirectoryServices.DirectoryEntry,System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.GetProperty(System.DirectoryServices.DirectoryEntry,System.String)">
             <summary>
             Obtiene una propiedad del objeto de active directory .-
             </summary>
@@ -722,7 +744,7 @@
             <param name="propertyName"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.GetProperty(System.DirectoryServices.SearchResult,System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.GetProperty(System.DirectoryServices.SearchResult,System.String)">
             <summary>
             Obtiene una propiedad del objeto de active directory .-
             </summary>
@@ -730,7 +752,7 @@
             <param name="propertyName"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.FilterOutDomain(System.String)">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.FilterOutDomain(System.String)">
             <summary>
             Quita el dominio en la especificacion del nombre de usuario, si es 
             que existe tal valor.-
@@ -738,7 +760,7 @@
             <param name="userName"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Security.ActiveDirectory.ADHelper.Dispose">
+        <member name="M:Fwk.Security.ActiveDirectory.ADWrapper.Dispose">
             <summary>
             
             </summary>
@@ -1529,6 +1551,32 @@
             <param name="userName"></param>
             <param name="password"></param>
             <param name="logError"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.Security.ActiveDirectory.LDAPHelper.User_Logon_IsAuthenticated(System.String,System.String)">
+            <summary>
+            Este metoo autentica elusuario pero no espesifica el error. Tal como lo hace User_Logon retornando LoginResult
+            </summary>
+            <param name="username"></param>
+            <param name="pwd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.Security.ActiveDirectory.LDAPHelper.User_Logon_IsAuthenticated(System.String,System.String,System.String,System.String)">
+            <summary>
+             Este metoo autentica elusuario pero no espesifica el error. Tal como lo hace User_Logon retornando LoginResult
+            </summary>
+            <param name="LDAPPath">url ldap o coneccion ldap perteneciente al dominio</param>
+            <param name="domainName">Nombre de dominio</param>
+            <param name="username">Nombre de usuario</param>
+            <param name="pwd">password</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.Security.ActiveDirectory.LDAPHelper.IsAuthenticated_test(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="username"></param>
+            <param name="pwd"></param>
             <returns></returns>
         </member>
         <member name="M:Fwk.Security.ActiveDirectory.LDAPHelper.GetImpersonate_SearchRoot_DE">
@@ -2399,6 +2447,30 @@
             
             </summary>
             <param name="owner"></param>
+        </member>
+        <member name="T:Fwk.Security.Impersonation_2">
+            <summary>
+            Perform windows context Impersonation
+            </summary>
+        </member>
+        <member name="M:Fwk.Security.Impersonation_2.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor de la clase Impersonate
+            Por defecto impersonaliza para realizar cambio de contraseña
+            </summary>       
+            <param name="userName">Dominio del usuario a impersonalizar</param>
+            <param name="password">password</param>
+            <param name="domain">Dominio ej Pelsoft</param>
+        </member>
+        <member name="M:Fwk.Security.Impersonation_2.Impersonate">
+            <summary>
+            Lleva a cabo la impersonalizacion
+            </summary>
+        </member>
+        <member name="M:Fwk.Security.Impersonation_2.UnImpersonate">
+            <summary>
+            Termina la sesion y retorna a la anterior
+            </summary>
         </member>
         <member name="T:Fwk.Security.Impersonation">
             <summary>
@@ -3785,7 +3857,7 @@
         </member>
         <member name="M:Fwk.Security.StaticsValues.Find_ADHelper(System.String)">
             <summary>
-            Busca un objeto <see cref="T:Fwk.Security.ActiveDirectory.ADHelper"/> si no lo encuentra intenta crearlo e insertarlo al diccionario.-
+            Busca un objeto <see cref="T:Fwk.Security.ActiveDirectory.ADWrapper"/> si no lo encuentra intenta crearlo e insertarlo al diccionario.-
             La creacion del diccionario se hace para no instanciar cientos de veses la clase ADHelper. ya que esta tarea requiere ,mas uso de CPU que el costo de mantener en memoria 
             un diccionario con porcos ADHelper. 
             En el mundo reali no existiran gran cantidad de clases ADHelper, pero si muchas quisa cientos de ejecuciones del metodos de autenticacio, q son los que 
