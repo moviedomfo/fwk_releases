@@ -476,7 +476,7 @@
         </member>
         <member name="P:Fwk.Bases.ServiceContractBase`1.IEntity">
             <summary>
-            
+            GetBusinessDataObject
             </summary>
         </member>
         <member name="T:Fwk.Bases.IRequest">
@@ -1030,6 +1030,15 @@
             </summary>
             <param name="paramId"></param>
             <param name="parentId"></param>
+            <param name="culture"></param>
+            <param name="cnnStringName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.Params.Back.ParamDAC.Get(System.Nullable{System.Int32},System.String,System.String)">
+            <summary>
+            Retorna un param por id y cultura
+            </summary>
+            <param name="paramId"></param>
             <param name="culture"></param>
             <param name="cnnStringName"></param>
             <returns></returns>
@@ -3333,6 +3342,7 @@
             <param name="providerName">Nombre del proveedor de metadata de servicios.-</param>
             <param name="serviceName">Nombre del servicio de negocio.</param> 
             <param name="jsonRequest">JSON con datos de entrada para la  ejecución del servicio.</param>
+            <param name="hostContext">Info del despachador de servicio</param>
             <returns>JSON con el resultado de la  ejecución del servicio.</returns>
             <date>2008-04-07T00:00:00</date>
             <author>moviedo</author>
@@ -3412,6 +3422,135 @@
             <returns></returns>
         </member>
         <member name="M:Fwk.BusinessFacades.SimpleFacade.CheckServiceAvailability">
+            <summary>
+            Chequea la disponibilidad del despachador de servicio
+            </summary>
+            <returns>Mensaje en caso de que el servicio no esté disponible</returns>
+        </member>
+        <member name="T:Fwk.BusinessFacades.StaticFacade">
+            <summary>
+            Fachada de servicio por defecto a utilizar por las aplicaciones.
+            </summary>
+            <remarks>Esta fachada realiza las siguientes tareas: 
+            
+            <list type="number">
+            <item>Audita la  ejecución del servicio.</item>
+            <item>Provee seguridad de acceso al servicio.</item>
+            <item>Verifica que el servicio está disponible para ser ejecutado.</item>
+            <item>Ejecuta el servicio a través de MSDTC en caso de ser necesario.</item>
+            </list>
+            </remarks>
+            <date>2008-04-07T00:00:00</date>
+            <author>moviedo</author>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.ExecuteService(System.String,Fwk.Bases.IServiceContract)">
+            <summary>
+            Ejecuta un servicio de negocio.
+            </summary>
+            <param name="providerName">Nombre del proveedor de metadata de servicios.-</param>
+            <param name="pRequest">Request con datos de entrada para la  ejecución del servicio.</param>
+            <returns>XML con el resultado de la  ejecución del servicio.</returns>
+            <date>2008-04-07T00:00:00</date>
+            <author>moviedo</author>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.ExecuteService(System.String,System.String,System.String)">
+            <summary>
+            Ejecuta un servicio de negocio.
+            </summary>
+            <param name="providerName">Nombre del proveedor de metadata de servicios.-</param>
+            <param name="serviceName">Nombre del servicio de negocio.</param> 
+            <param name="pXmlRequest">XML con datos de entrada para la  ejecución del servicio.</param>
+            <returns>XML con el resultado de la  ejecución del servicio.</returns>
+            <date>2008-04-07T00:00:00</date>
+            <author>moviedo</author>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.ExecuteServiceJson(System.String,System.String,System.String,Fwk.Bases.Blocks.Fwk.BusinessFacades.HostContext)">
+            <summary>
+            Ejecuta un servicio de negocio.
+            </summary>
+            <param name="providerName">Nombre del proveedor de metadata de servicios.-</param>
+            <param name="serviceName">Nombre del servicio de negocio.</param> 
+            <param name="jsonRequest">JSON con datos de entrada para la  ejecución del servicio.</param>
+            <param name="hostContext">Info del despachador de servicio</param>
+            <returns>JSON con el resultado de la  ejecución del servicio.</returns>
+            <date>2008-04-07T00:00:00</date>
+            <author>moviedo</author>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.GetCaheDataById(Fwk.Bases.IRequest,Fwk.Bases.ServiceConfiguration)">
+            <summary>
+            Obtiene la data de la cache. si no lo encuentra ejecuta el servicio y lo almacena en la cache para proximo busqueda
+            </summary>
+            <param name="pRequest"></param>
+            <param name="pServiceConfiguration"></param>
+            <returns>IServiceContract con el response</returns>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.GetServiceConfiguration(System.String,System.String)">
+            <summary>
+            Obtiene la configuracion de un servicio
+            </summary>
+            <param name="providerName">Nombre del proveedor de la metadata de szervicio</param>
+            <param name="serviceName">Nombre del servicio a obtener</param>
+            <returns>Informacion del servicio</returns>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.GetServicesList(System.String,System.Boolean)">
+            <summary>
+            lista los servicios configurados
+            </summary>
+            <param name="providerName">Nombre del proveedor de metadata de servicios.-</param>
+            <param name="pViewXML">Permite ver como xml todos los servicios y sus datos.
+            Si se espesifuca false solo se vera una simple lista</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.SetServiceConfiguration(System.String,System.String,Fwk.Bases.ServiceConfiguration)">
+            <summary>
+            Actualiza la configuración de un servicio de negocio.
+            </summary>
+            <param name="providerName">Nombre del proveedor de metadata de servicios.-</param>
+            <param name="serviceName"></param>
+            <param name="pServiceConfiguration">configuración del servicio de negocio.</param>
+            <date>2010-08-10T00:00:00</date>
+            <author>moviedo</author>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.AddServiceConfiguration(System.String,Fwk.Bases.ServiceConfiguration)">
+            <summary>
+            Almacena la configuración de un nuevo servicio de negocio.
+            </summary>
+            <param name="providerName">Nombre del proveedor de metadata de servicios.-</param>
+            <param name="pServiceConfiguration">configuración del servicio de negocio.</param>
+            <date>2008-04-13T00:00:00</date>
+            <author>moviedo</author>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.DeleteServiceConfiguration(System.String,System.String)">
+            <summary>
+            Elimina la configuración de un servicio de negocio.
+            </summary>
+            <param name="providerName">Nombre del proveedor de metadata de servicios.-</param>
+            <param name="serviceName">Nombre del servicio.</param>
+            <date>2008-04-13T00:00:00</date>
+            <author>moviedo</author>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.GetAllApplicationsId(System.String)">
+            <summary>
+            Obtiene una lista de todas las aplicaciones configuradas en el origen de datos configurado por el 
+            proveedor
+            </summary>
+            <param name="providerName">Nombre del proveedor de metadata de servicios.-</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.GetProviderInfo(System.String)">
+            <summary>
+            Obtiene info del proveedor de metadata
+            </summary>
+            <param name="providerName">Nombre del proveedor de metadata de servicios.-</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.RetriveDispatcherInfo">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.BusinessFacades.StaticFacade.CheckServiceAvailability">
             <summary>
             Chequea la disponibilidad del despachador de servicio
             </summary>
@@ -8213,12 +8352,23 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Fwk.HelperFunctions.ReflectionFunctions.CreateInstanceLoad(System.String,System.String,System.Object[])" -->
+        <member name="M:Fwk.HelperFunctions.ReflectionFunctions.CreateInstanceLoad(System.String,System.String,System.Object[])">
+            <summary>
+            Crea instancia de un objetos a partir de de su nombre largo y sus parametros.
+            Efectua load assembly
+            </summary>
+            <param name="pClassName">Nombre de la clase (Type.FullName)</param>
+            <param name="pAssemblyName">Nombre del ensamblado (Assembly.Name)</param>
+            <param name="constructorParams">An array of arguments that match in number, order, and type the parameters of the constructor to invoke. 
+            If args is an empty array or nullNothingnullptra null reference (Nothing in Visual Basic), 
+            the constructor that takes no parameters (the default constructor) is invoked. </param>
+            <returns></returns>
+        </member>
         <member name="M:Fwk.HelperFunctions.ReflectionFunctions.ExtractTypeInformation(System.String,System.String@,System.String@)">
             <summary>
             
             </summary>
-            <param name="pAssemblyString"></param>
+            <param name="pAssemblyString">El parametro pAssemblyString espera el siguiente formato : [Namespase.ClassName ,Assembly]</param>
             <param name="pClassName"></param>
             <param name="pAssembly"></param>
         </member>
@@ -8241,7 +8391,7 @@
             <summary>
             Crea un tipo dinamicamente a partir del nombre un archivo.-
             </summary>
-            <param name="pAssemblyString">Concatenacion de ClassName + , + AssemblyName</param>
+            <param name="pAssemblyString">Concatenacion de [ClassName,AssemblyName]</param>
             <param name="pPath">Ruta del archivo</param>
             <returns>Type definido por ClassName</returns>
         </member>
@@ -8257,6 +8407,11 @@
             <returns>Valor de la propiedad</returns>
         </member>
         <member name="M:Fwk.HelperFunctions.ReflectionFunctions.GetPropertieValue(System.Object,System.String)">
+            <summary>
+            Retorna el valor de una propiedad.-
+            Generalmente utilizado cuando el nombre de la propiedad es generada dinamicamente y no se sabe en 
+            desing time que propiedad sera utilizada de un objeto.-
+            </summary>
             <param name="pSourceObject">Objeto que contiene la propiedad</param>
             <param name="pPropertyName">Nombre de la propiedad</param>
             <returns>Valor de la propiedad en string</returns>
@@ -8281,14 +8436,11 @@
             <returns>Valor de la propiedad</returns>
         </member>
         <member name="M:Fwk.HelperFunctions.ReflectionFunctions.MapProperties``1(``0,``0@)">
-            <summary>
              Efectua un mapeo de todas las propiedades de un objeto a otro 
              el mapeo solo lo hace de los atributos del tipo T, esto es debido a que 
              puede pasarce como T una interfaz y los objetos source y destino ser de distinto tipo
-             
-            </summary>
             <typeparam name="T"></typeparam>
-            <param name="spurce"></param>
+            <param name="source"></param>
             <param name="target"></param>
         </member>
         <member name="T:Fwk.HelperFunctions.SerializationFunctions">
