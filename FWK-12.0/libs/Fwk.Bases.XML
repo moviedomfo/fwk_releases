@@ -3082,6 +3082,12 @@
             </summary>
             <param name="ex"></param>
         </member>
+        <member name="M:Fwk.BusinessFacades.Utils.Audit.LogDispatcherError(System.Exception)">
+            <summary>
+            Log error from dispatcher on xml File
+            </summary>
+            <param name="ex"></param>
+        </member>
         <member name="M:Fwk.BusinessFacades.Utils.Audit.LogNonSucessfulExecution(Fwk.Bases.IServiceContract,Fwk.Bases.IServiceContract)">
             <summary>
             Genera un log de tipo "Error" cuando se ha producido
@@ -3090,7 +3096,7 @@
             <param name="pRequest">Request</param>
             <param name="wResult">Response</param>
         </member>
-        <member name="M:Fwk.BusinessFacades.Utils.Audit.LogSuccessfulExecution(Fwk.Bases.IServiceContract,Fwk.Bases.IServiceContract)">
+        <member name="M:Fwk.BusinessFacades.Utils.Audit.LogSuccessfulExecution(Fwk.Bases.IServiceContract,Fwk.Bases.IServiceContract,Fwk.Logging.EventType)">
             <summary>
             Almacena informacion de auditoria.- 
             Llama a StaticLogger y carga el log auditando los datos del Request de entrada
@@ -3397,6 +3403,30 @@
             <returns>JSON con el resultado de la  ejecución del servicio.</returns>
             <date>2008-04-07T00:00:00</date>
             <author>moviedo</author>
+        </member>
+        <member name="M:Fwk.BusinessFacades.SimpleFacade.ExecuteServiceJson_newtonjs(System.String,System.String,System.String,Fwk.Bases.Blocks.Fwk.BusinessFacades.HostContext)">
+            <summary>
+            usa internamente Newtonsoft para serializar json
+            </summary>
+            <param name="providerName"></param>
+            <param name="serviceName"></param>
+            <param name="jsonRequest"></param>
+            <param name="hostContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.BusinessFacades.SimpleFacade.get_TechnicalException_error_loading_req(Fwk.Bases.ServiceConfiguration,System.Exception)">
+            <summary>
+            Audita y retorna error
+            </summary>
+            <param name="serviceConfiguration"></param>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.BusinessFacades.SimpleFacade.get_TechnicalException_error_serviceName_null">
+            <summary>
+            Audita y retorna error
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Fwk.BusinessFacades.SimpleFacade.GetCaheDataById(Fwk.Bases.IRequest,Fwk.Bases.ServiceConfiguration)">
             <summary>
@@ -8642,7 +8672,23 @@
         </member>
         <member name="M:Fwk.HelperFunctions.SerializationFunctions.SerializeObjectToJson(System.Type,System.Object)">
             <summary>
-            Serealiza pobject to json
+            usa DataContractJsonSerializer 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.HelperFunctions.SerializationFunctions.SerializeObjectToJson_JavaScriptSerializer(System.Type,System.Object)">
+            <summary>
+            usa JavaScriptSerializer 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.HelperFunctions.SerializationFunctions.SerializeObjectToJson_Newtonsoft(System.Type,System.Object)">
+            <summary>
+            usa Newtonsoft 
             </summary>
             <typeparam name="T"></typeparam>
             <param name="obj"></param>
@@ -8650,13 +8696,29 @@
         </member>
         <member name="M:Fwk.HelperFunctions.SerializationFunctions.DeSerializeObjectFromJson``1(System.String)">
             <summary>
-            deserialize an instance of type T from JSON
+            usa DataContractJsonSerializer 
             </summary>
             <returns></returns>
         </member>
         <member name="M:Fwk.HelperFunctions.SerializationFunctions.DeSerializeObjectFromJson(System.Type,System.String)">
             <summary>
-            deserialize an instance of type objType from JSON
+            usa DataContractJsonSerializer
+            </summary>
+            <param name="objType"></param>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.HelperFunctions.SerializationFunctions.DeSerializeObjectFromJson_JavaScriptSerializer(System.Type,System.String)">
+            <summary>
+            usa JavaScriptSerializer
+            </summary>
+            <param name="objType"></param>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.HelperFunctions.SerializationFunctions.DeSerializeObjectFromJson_Newtonsoft(System.Type,System.String)">
+            <summary>
+            Usa  Newtonsoft.Json.JsonConvert
             </summary>
             <param name="objType"></param>
             <param name="json"></param>
