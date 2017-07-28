@@ -753,10 +753,9 @@
             </example>
              <Author>Marcelo .F. Oviedo</Author> 
         </member>
-        <member name="T:Fwk.Bases.IEntity">
+        <member name="T:Fwk.Bases.BaseEntity">
             <summary>
-            Define la interfaz de todas las Entidades tipo coleccion y escalares.
-            Es decir la interfaz de las Entities y las Entity
+            
             </summary>
         </member>
         <member name="T:Fwk.Bases.IBaseEntity">
@@ -775,6 +774,63 @@
             <summary>
             Rellena la clase con los valores del XML 
             <param name="pXmlData">Xml con el que se crea el objeto</param>
+            </summary>
+        </member>
+        <member name="M:Fwk.Bases.BaseEntity.Clone``1">
+            <summary>
+            Crea una copia espejo de la clase.-
+            </summary>
+            <typeparam name="TEntity">Tipo de Entity que implementa IBaseEntity </typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.Bases.BaseEntity.Clone">
+            <summary>
+            Crea una copia espejo de la clase.-
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.Bases.BaseEntity.System#ICloneable#Clone">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fwk.Bases.BaseEntity.GetXml">
+            <summary>
+            Obtine un xml producto de la serializacion de la clase FacturaBE
+            </summary>
+            <returns>string con el xml de la serializacion</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Fwk.Bases.BaseEntity.SetXml(System.String)" -->
+        <member name="M:Fwk.Bases.BaseEntity.GetFromXml``1(System.String)">
+            <summary>
+            Retorna un objeto a partir de la instancia estatica
+            </summary>
+            <typeparam name="T">Tipo de entidad que se decee retornar este es un type gennerico ya que el metodo esta definido en la clase base</typeparam>
+            <param name="pXmlData">Xml del objeto que se decea retornar</param>
+            <returns>Entidad  </returns>
+        </member>
+        <member name="M:Fwk.Bases.BaseEntity.ToString">
+            <summary>
+             Returns a String that represents the current object.
+            </summary>
+        </member>
+        <member name="M:Fwk.Bases.BaseEntity.ToString(System.Object)">
+            <summary>
+            Give a string representation of a object, with use of reflection.
+            </summary>
+            <param name="o">O.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Fwk.Bases.BaseEntity.EntityState">
+            <summary>
+            Retorna el estado de modificacion actual de la clase 
+            </summary>
+        </member>
+        <member name="T:Fwk.Bases.IEntity">
+            <summary>
+            Define la interfaz de todas las Entidades tipo coleccion y escalares.
+            Es decir la interfaz de las Entities y las Entity
             </summary>
         </member>
         <member name="M:Fwk.Bases.IEntity.GetDataSet">
@@ -838,25 +894,6 @@
             <param name="pXmlData">Xml del objeto que se decea retornar</param>
             <returns>Entidad  </returns>
         </member>
-        <member name="M:Fwk.Bases.Entity.Clone``1">
-            <summary>
-            Crea una copia espejo de la clase.-
-            </summary>
-            <typeparam name="TEntity">Tipo de Entity que implementa IEntity </typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Fwk.Bases.Entity.Clone">
-            <summary>
-            Crea una copia espejo de la clase.-
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Fwk.Bases.Entity.System#ICloneable#Clone">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Fwk.Bases.Entity.ToString">
             <summary>
              Returns a String that represents the current object.
@@ -868,11 +905,6 @@
             </summary>
             <param name="o">O.</param>
             <returns></returns>
-        </member>
-        <member name="P:Fwk.Bases.Entity.EntityState">
-            <summary>
-            Retorna el estado de modificacion actual de la clase 
-            </summary>
         </member>
         <member name="P:Fwk.Configuration.ISVC.Param.ConfigProviderName">
             <summary>
@@ -2079,57 +2111,6 @@
             entidad serializable auxiliar de ServiceProviderElement para uso de herramientas 
             </summary>
         </member>
-        <member name="T:Fwk.Bases.BaseEntity">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Fwk.Bases.BaseEntity.Clone``1">
-            <summary>
-            Crea una copia espejo de la clase.-
-            </summary>
-            <typeparam name="TEntity">Tipo de Entity que implementa IBaseEntity </typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Fwk.Bases.BaseEntity.Clone">
-            <summary>
-            Crea una copia espejo de la clase.-
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Fwk.Bases.BaseEntity.System#ICloneable#Clone">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Fwk.Bases.BaseEntity.GetXml">
-            <summary>
-            Obtine un xml producto de la serializacion de la clase FacturaBE
-            </summary>
-            <returns>string con el xml de la serializacion</returns>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:Fwk.Bases.BaseEntity.SetXml(System.String)" -->
-        <member name="M:Fwk.Bases.BaseEntity.GetFromXml``1(System.String)">
-            <summary>
-            Retorna un objeto a partir de la instancia estatica
-            </summary>
-            <typeparam name="T">Tipo de entidad que se decee retornar este es un type gennerico ya que el metodo esta definido en la clase base</typeparam>
-            <param name="pXmlData">Xml del objeto que se decea retornar</param>
-            <returns>Entidad  </returns>
-        </member>
-        <member name="M:Fwk.Bases.BaseEntity.ToString">
-            <summary>
-             Returns a String that represents the current object.
-            </summary>
-        </member>
-        <member name="M:Fwk.Bases.BaseEntity.ToString(System.Object)">
-            <summary>
-            Give a string representation of a object, with use of reflection.
-            </summary>
-            <param name="o">O.</param>
-            <returns></returns>
-        </member>
         <member name="M:Fwk.ConfigSection.MetadataProvider.#ctor">
             <summary>
             
@@ -2711,7 +2692,7 @@
             <param name="pBlockingMark"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Blocking.IBlockingEngine.Exists(System.Guid,System.Nullable{System.Int32})">
+        <member name="M:Fwk.Blocking.IBlockingEngine.Exists(System.Nullable{System.Guid},System.Nullable{System.Int32})">
             <summary>
             
             </summary>
@@ -2769,7 +2750,7 @@
             </summary>
             <returns>RetryCount</returns>
         </member>
-        <member name="M:Fwk.Blocking.BlockingEngineBase.Exists(System.Guid,System.Nullable{System.Int32})">
+        <member name="M:Fwk.Blocking.BlockingEngineBase.Exists(System.Nullable{System.Guid},System.Nullable{System.Int32})">
             <summary>
             Verifica si existe marcas. Si exite alguna marca retorna los usuarios.
             </summary>
@@ -2854,7 +2835,8 @@
         <member name="M:Fwk.Blocking.BlockingEngineDAC.GetByParam(Fwk.Blocking.IBlockingMark)">
             <summary>Obtiene una o varias marcas de bloqueo</summary>
             <param name="pIBlockingMark">Clase que implementa IBlockingMark</param>
-            <returns>Tabla con las marcas obtenidas</returns>
+            <returns>Tabla con las marcas obtenidas
+            Datatable con BlockingId,TableName,Attribute,AttValue,TTL,UserName,FwkGuid,DueDate,Process</returns>
             <create>hebraida</create>
             <date>2010-07-15</date>
         </member>
@@ -3422,12 +3404,7 @@
             <param name="ex"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.BusinessFacades.SimpleFacade.get_TechnicalException_error_serviceName_null">
-            <summary>
-            Audita y retorna error
-            </summary>
-            <returns></returns>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:Fwk.BusinessFacades.SimpleFacade.get_TechnicalException_error_serviceName_null" -->
         <member name="M:Fwk.BusinessFacades.SimpleFacade.GetCaheDataById(Fwk.Bases.IRequest,Fwk.Bases.ServiceConfiguration)">
             <summary>
             Obtiene la data de la cache. si no lo encuentra ejecuta el servicio y lo almacena en la cache para proximo busqueda
