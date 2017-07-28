@@ -2711,7 +2711,7 @@
             <param name="pBlockingMark"></param>
             <returns></returns>
         </member>
-        <member name="M:Fwk.Blocking.IBlockingEngine.Exists(System.Guid,System.Nullable{System.Int32})">
+        <member name="M:Fwk.Blocking.IBlockingEngine.Exists(System.Nullable{System.Guid},System.Nullable{System.Int32})">
             <summary>
             
             </summary>
@@ -2769,7 +2769,7 @@
             </summary>
             <returns>RetryCount</returns>
         </member>
-        <member name="M:Fwk.Blocking.BlockingEngineBase.Exists(System.Guid,System.Nullable{System.Int32})">
+        <member name="M:Fwk.Blocking.BlockingEngineBase.Exists(System.Nullable{System.Guid},System.Nullable{System.Int32})">
             <summary>
             Verifica si existe marcas. Si exite alguna marca retorna los usuarios.
             </summary>
@@ -2854,7 +2854,8 @@
         <member name="M:Fwk.Blocking.BlockingEngineDAC.GetByParam(Fwk.Blocking.IBlockingMark)">
             <summary>Obtiene una o varias marcas de bloqueo</summary>
             <param name="pIBlockingMark">Clase que implementa IBlockingMark</param>
-            <returns>Tabla con las marcas obtenidas</returns>
+            <returns>Tabla con las marcas obtenidas
+            Datatable con BlockingId,TableName,Attribute,AttValue,TTL,UserName,FwkGuid,DueDate,Process</returns>
             <create>hebraida</create>
             <date>2010-07-15</date>
         </member>
