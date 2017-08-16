@@ -20,12 +20,14 @@ namespace $fwkprojectname$.Common.BE
 {
     public class [EntityName]List :Entities<[EntityName]>
     {}
-  
+
     public class [EntityName]:Entity
     {
         [PROPERTY_BODY]
     }
- }
+
+}
+
          
 
    
